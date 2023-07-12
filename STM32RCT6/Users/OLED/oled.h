@@ -1,7 +1,7 @@
 #ifndef __OLED_H
 #define __OLED_H
 
-#include "gpio.h"
+#include "main.h"
 
 void OLED_Init(void);
 void OLED_Clear(void);

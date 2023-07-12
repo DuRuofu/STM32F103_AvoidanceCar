@@ -5,7 +5,6 @@ void Encoder_Count_Init(void)
 {
     HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-
 }
 
 //编码器数据读取

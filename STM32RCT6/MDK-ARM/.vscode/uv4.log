@@ -1,0 +1,4 @@
+Load "..\\Output\\STM32F103RCT6_CAR.axf" 
+Error: Not a genuine ST Device! Abort connection. 
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 17:48:49

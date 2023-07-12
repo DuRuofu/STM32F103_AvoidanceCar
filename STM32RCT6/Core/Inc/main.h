@@ -77,10 +77,10 @@ void Error_Handler(void);
 #define AIN2_GPIO_Port GPIOB
 #define AIN1_Pin GPIO_PIN_13
 #define AIN1_GPIO_Port GPIOB
-#define OLED_SCL_Pin GPIO_PIN_8
-#define OLED_SCL_GPIO_Port GPIOC
-#define OLED_SDA_Pin GPIO_PIN_9
-#define OLED_SDA_GPIO_Port GPIOC
+#define I2C_SCL_Pin GPIO_PIN_8
+#define I2C_SCL_GPIO_Port GPIOC
+#define I2C_SDA_Pin GPIO_PIN_9
+#define I2C_SDA_GPIO_Port GPIOC
 #define LED_2_Pin GPIO_PIN_8
 #define LED_2_GPIO_Port GPIOA
 #define LED_1_Pin GPIO_PIN_2

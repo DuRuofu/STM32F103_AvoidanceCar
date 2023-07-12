@@ -2,8 +2,8 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-07 15-49-11
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-12 08-52-49
- * @FilePath: \MDK-ARMd:\duruofu\Project\balancedVehicle\code\project\STM32code\User\PWM\pwm.c
+ * @LastEditTime: 2023-07-12 17-33-36
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32RCT6\Users\PWM\pwm.c
  * @Description: PWM模块(驱动电机使用,双路同频)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
  */
@@ -11,7 +11,7 @@
 #include "pwm.h"
 
 //在此设置使用的定时器和对应A,B两路PWM的通道
-#define TIM  htim1
+#define TIM  htim4
 #define PWM_CHANNEL_A TIM_CHANNEL_1
 #define PWM_CHANNEL_B TIM_CHANNEL_4
 
