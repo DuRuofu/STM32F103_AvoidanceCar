@@ -12,11 +12,11 @@ int16_t Encoder_Value(uint8_t n)
 {
     if (n == 1)
     {
-        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim4));
+        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim3));
     }
     else if (n == 2)
     {
-        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim3));
+        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim4));
     }
     else
     {
@@ -29,11 +29,11 @@ void Encoder_Count_Clear(uint8_t n)
 {
     if (n == 1)
     {
-        __HAL_TIM_SET_COUNTER(&htim4, 0);
+        __HAL_TIM_SET_COUNTER(&htim3, 0);
     }
     else if (n == 2)
     {
-        __HAL_TIM_SET_COUNTER(&htim3, 0);
+        __HAL_TIM_SET_COUNTER(&htim4, 0);
     }
 }
 
