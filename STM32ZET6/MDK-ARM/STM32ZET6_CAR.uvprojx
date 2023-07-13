@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Users\APP;..\Users\Encoder;..\Users\Motor;..\Users\OLED;..\Users\PWM;..\Users\USART;..\Users\LED</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Users\APP;..\Users\Encoder;..\Users\Motor;..\Users\OLED;..\Users\PWM;..\Users\USART;..\Users\LED;..\Users\Grayscale</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -467,6 +467,11 @@
               <FileName>serial_it_config.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\USART\serial_it_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>Grayscale.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\Grayscale\Grayscale.c</FilePath>
             </File>
           </Files>
         </Group>

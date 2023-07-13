@@ -3,6 +3,8 @@
 int32_t car_speed_1 = 0; // 电机1速度
 int32_t car_speed_2 = 0; // 电机2速度
 
+uint8_t Grayscale_Value[5] = {0}; // 五路灰度模块的值
+
 /**
  * @description: 系统应用初始化
  * @return {*}
@@ -19,8 +21,9 @@ void App_Init(void)
     //控制电机
     Motor_Ctrl(5000, 1);
     Motor_Ctrl(5000, 2);
-
 }
+
+
 
 /**
  * @description: 系统应用循环任务
@@ -28,14 +31,14 @@ void App_Init(void)
  */
 void App_Task(void)
 {
-    LED_Toggle(); // 测试LED
-    // HAL_Delay(100);
-    // 测试串口
+    LED_Toggle(); // LED心跳
+    
     // 显示电机速度
     OLED_ShowSignedNum(1, 1, car_speed_1, 5);
     OLED_ShowSignedNum(1, 8, car_speed_2, 5);
-    //OLED_ShowSigned(2,1,"hello DuRuofu");
-    
+
+    OLED_ShowSigned(2,1,"hello DuRuofu");
+    DEBUG_info("循迹模块:","%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
     HAL_Delay(50);
 }
 
@@ -55,10 +58,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             // 读取编码器速度
             Motor_Speed_Read();
         }
+        //读取灰度模块
+        Grayscale_Read(Grayscale_Value);
     }
 }
-
-
 
 
 //读取电机速度
@@ -75,8 +78,11 @@ void Motor_Speed_Read(void)
     Encoder_Count_Clear(2);
 }
 
-// pid部分
 
+
+
+
+// pid部分
 
 
 // /**

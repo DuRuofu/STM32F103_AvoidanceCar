@@ -8,7 +8,7 @@
 #include "motor.h"
 #include "encoder.h"
 #include "serial_it_config.h"
-
+#include "Grayscale.h"
 
 
 void App_Init(void);
