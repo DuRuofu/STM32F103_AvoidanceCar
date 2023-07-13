@@ -1,7 +1,7 @@
 #include "app.h"
 
-int32_t car_speed_1 = 0; // 电机1速度
-int32_t car_speed_2 = 0; // 电机2速度
+int16_t car_speed_1 = 0; // 电机1速度
+int16_t car_speed_2 = 0; // 电机2速度
 
 uint8_t Grayscale_Value[5] = {0}; // 五路灰度模块的值
 
@@ -38,6 +38,7 @@ void App_Task(void)
     OLED_ShowSignedNum(1, 8, car_speed_2, 5);
 
     //OLED_ShowSigned(2,1,"hello DuRuofu");
+    Usart2_SendString("hello DuRuofu\r\n");
     DEBUG_info("循迹模块:","%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
     HAL_Delay(50);
 }

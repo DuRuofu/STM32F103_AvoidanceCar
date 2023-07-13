@@ -9,6 +9,7 @@ void USART_IT_Config(void)
     //串口1接收中断初始化
     Debug_Init();
     //串口2接收中断初始化
+    USART2_Init();
 
     //串口3接收中断初始化
 }
@@ -22,7 +23,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
     else if(huart->Instance == USART2)
     {
-        //UART2_RxCpltCallback();
+        UART2_RxCpltCallback();
     }
     else if(huart->Instance == USART3)
     {
@@ -40,7 +41,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
     else if(huart->Instance == USART2)
     {
-        //UART2_ErrorCallback();
+        UART2_ErrorCallback();
     }
     else if(huart->Instance == USART3)
     {

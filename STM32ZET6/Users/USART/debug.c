@@ -85,17 +85,7 @@ void UART1_ErrorCallback(UART_HandleTypeDef *huart)
   }
 }
 
-/*****************  发送字符串 **********************/
-void Usart_SendString(uint8_t *str)
-{
-	unsigned int k=0;
-  do 
-  {
-      HAL_UART_Transmit(&UART_HANDLE,(uint8_t *)(str + k) ,1,1000);
-      k++;
-  } while(*(str + k)!='\0');
-   
-}
+
 
 /**
   * 函数功能: 重定向c库函数printf到DEBUG_USARTx

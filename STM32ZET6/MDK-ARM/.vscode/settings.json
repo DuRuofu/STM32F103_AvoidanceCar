@@ -2,6 +2,9 @@
     "files.associations": {
         "grayscale.h": "c",
         "main.h": "c",
-        "app.h": "c"
+        "app.h": "c",
+        "usart_2.h": "c",
+        "stdio.h": "c",
+        "usart.h": "c"
     }
 }

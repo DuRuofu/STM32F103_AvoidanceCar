@@ -8,15 +8,15 @@ void Encoder_Count_Init(void)
 }
 
 //编码器数据读取
-int32_t Encoder_Value(uint8_t n)
+int16_t Encoder_Value(uint8_t n)
 {
     if (n == 1)
     {
-        return (int32_t)(__HAL_TIM_GET_COUNTER(&htim4));
+        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim4));
     }
     else if (n == 2)
     {
-        return (int32_t)(__HAL_TIM_GET_COUNTER(&htim3));
+        return (int16_t)(__HAL_TIM_GET_COUNTER(&htim3));
     }
     else
     {

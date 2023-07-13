@@ -6,7 +6,7 @@
 
 
 void Encoder_Count_Init(void);
-int32_t Encoder_Value(uint8_t n);
+int16_t Encoder_Value(uint8_t n);
 void Encoder_Count_Clear(uint8_t n);
 
 #endif // !__ENCODER_H
