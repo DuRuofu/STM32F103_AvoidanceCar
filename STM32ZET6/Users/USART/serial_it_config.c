@@ -1,3 +1,13 @@
+/*
+ * @Author: DuRuofu duruofu@qq.com
+ * @Date: 2023-07-13 17-13-53
+ * @LastEditors: DuRuofu
+ * @LastEditTime: 2023-07-13 20-42-26
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\serial_it_config.c
+ * @Description: 串口接收中断配置(总)
+ * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
+ */
+
 #include "serial_it_config.h"
 
 /**

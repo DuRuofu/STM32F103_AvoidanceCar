@@ -2,8 +2,8 @@
  * @Author: DuRuofu
  * @Date: 2023-07-07 15-48-41
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-10 11-01-38
- * @FilePath: \MDK-ARMd:\duruofu\Project\balancedVehicle\code\project\STM32code\User\Motor\motor.c
+ * @LastEditTime: 2023-07-13 20-44-59
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\Motor\motor.c
  * @Description: 电机驱动模块(使用TB6612)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
  */
@@ -21,8 +21,6 @@
 // #define BIN1_GPIO_Port GPIOB
 // #define BIN2_Pin GPIO_PIN_15
 // #define BIN2_GPIO_Port GPIOB
-
-
 
 /**
  * @description: 电机初始化,让电机不乱动

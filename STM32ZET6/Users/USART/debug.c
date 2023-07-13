@@ -1,3 +1,13 @@
+/*
+ * @Author: DuRuofu duruofu@qq.com
+ * @Date: 2023-07-13 17-13-53
+ * @LastEditors: DuRuofu
+ * @LastEditTime: 2023-07-13 20-41-24
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\debug.c
+ * @Description: 串口1日志输出模块
+ * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
+ */
+
 #include "debug.h"
 #include "string.h"
 

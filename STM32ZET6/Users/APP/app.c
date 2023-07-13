@@ -1,3 +1,13 @@
+/*
+ * @Author: DuRuofu duruofu@qq.com
+ * @Date: 2023-07-13 17-13-53
+ * @LastEditors: DuRuofu
+ * @LastEditTime: 2023-07-13 20-40-46
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
+ * @Description: 应用层模块
+ * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
+ */
+
 #include "app.h"
 
 int16_t car_speed_1 = 0; // 电机1速度
