@@ -19,8 +19,8 @@ void App_Init(void)
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
 
     //控制电机
-    Motor_Ctrl(5000, 1);
-    Motor_Ctrl(5000, 2);
+    //Motor_Ctrl(5000, 1);
+    //Motor_Ctrl(5000, 2);
 }
 
 
@@ -37,7 +37,7 @@ void App_Task(void)
     OLED_ShowSignedNum(1, 1, car_speed_1, 5);
     OLED_ShowSignedNum(1, 8, car_speed_2, 5);
 
-    OLED_ShowSigned(2,1,"hello DuRuofu");
+    //OLED_ShowSigned(2,1,"hello DuRuofu");
     DEBUG_info("循迹模块:","%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
     HAL_Delay(50);
 }

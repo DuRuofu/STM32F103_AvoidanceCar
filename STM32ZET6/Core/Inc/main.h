@@ -79,12 +79,12 @@ void Error_Handler(void);
 #define I2C_SCL_GPIO_Port GPIOB
 #define I2C_SDA_Pin GPIO_PIN_13
 #define I2C_SDA_GPIO_Port GPIOB
+#define Follow_2_Pin GPIO_PIN_3
+#define Follow_2_GPIO_Port GPIOB
 #define Follow_1_Pin GPIO_PIN_4
 #define Follow_1_GPIO_Port GPIOB
 #define LED_1_Pin GPIO_PIN_5
 #define LED_1_GPIO_Port GPIOB
-#define Follow_2_Pin GPIO_PIN_6
-#define Follow_2_GPIO_Port GPIOB
 #define Follow_3_Pin GPIO_PIN_7
 #define Follow_3_GPIO_Port GPIOB
 #define Follow_4_Pin GPIO_PIN_8
