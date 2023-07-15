@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-52-31
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-15 18-03-18
+ * @LastEditTime: 2023-07-16 07-32-56
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\usart_2.c
  * @Description: 串口2的驱动代码(用于蓝牙调试)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -29,7 +29,7 @@ void USART2_Init(void)
   //使能 USART1 的接收中断
   __HAL_UART_ENABLE_IT(&UART_HANDLE,UART_IT_RXNE);
   //开启 USART1 的连续接收中断，并指定接收缓冲区的地址和长度
-  HAL_UART_Receive_IT(&UART_HANDLE,&Uart_RxBuffer_2,1);
+  //HAL_UART_Receive_IT(&UART_HANDLE,&Uart_RxBuffer_2,1);
 }
 
 //串口2接收完成回调函数

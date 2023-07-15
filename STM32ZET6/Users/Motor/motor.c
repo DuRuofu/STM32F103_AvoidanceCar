@@ -2,7 +2,7 @@
  * @Author: DuRuofu
  * @Date: 2023-07-07 15-48-41
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-13 20-44-59
+ * @LastEditTime: 2023-07-16 07-34-36
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\Motor\motor.c
  * @Description: 电机驱动模块(使用TB6612)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -103,6 +103,8 @@ void Motor_Start(void)
     TB6612_Ctrl(1,1);
     TB6612_Ctrl(1,2);
 }
+
+
 
 /**
  * @description: 控制TB6612驱动芯片驱动模式,

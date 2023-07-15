@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-13 20-42-26
+ * @LastEditTime: 2023-07-16 07-33-08
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\serial_it_config.c
  * @Description: 串口接收中断配置(总)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -33,7 +33,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
     else if(huart->Instance == USART2)
     {
-        UART2_RxCpltCallback();
+        //UART2_RxCpltCallback();
+        //串口2的接收逻辑依然在stm32f1xx_it.c中（待修改）
     }
     else if(huart->Instance == USART3)
     {

@@ -351,6 +351,7 @@ int8_t receiving_process(void)
       case RESET_CMD:
       {
         HAL_NVIC_SystemReset();          // 复位系统
+        set_computer_value(SEND_START_CMD, CURVES_CH1, NULL, 1);               // 同步上位机的启动按钮状态
         DEBUG_info("pid串口","复位系统");
       }
       break;
