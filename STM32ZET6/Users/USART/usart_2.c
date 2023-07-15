@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-52-31
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-13 18-16-54
+ * @LastEditTime: 2023-07-15 18-03-18
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\usart_2.c
  * @Description: 串口2的驱动代码(用于蓝牙调试)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -32,40 +32,15 @@ void USART2_Init(void)
   HAL_UART_Receive_IT(&UART_HANDLE,&Uart_RxBuffer_2,1);
 }
 
-//串口1接收完成回调函数
+//串口2接收完成回调函数
 void UART2_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    /* Prevent unused argument(s) compilation warning */
-  UNUSED(huart);
-  /* NOTE: This function Should not be modified, when the callback is needed,
-           the HAL_UART_TxCpltCallback could be implemented in the user file
-   */
- 
-	if(Uart_Rx_Cnt_2 >= 255)  //溢出判断
-	{
-		Uart_Rx_Cnt_2 = 0;
-		memset(RxBuffer_2,0x00,sizeof(RxBuffer_2));
-		HAL_UART_Transmit(&UART_HANDLE, (uint8_t *)"数据溢出", 10,0xFFFF); 	
-	}
-	else
-	{
-		RxBuffer_2[Uart_Rx_Cnt_2++] = Uart_RxBuffer_2;   
-	
-		
-		if((RxBuffer_2[Uart_Rx_Cnt_2-1] == 0x0A)&&(RxBuffer_2[Uart_Rx_Cnt_2-2] == 0x0D)) //判断结束位
-		{
-      //这里可以写多字节消息的判断
-			HAL_UART_Transmit(&UART_HANDLE, (uint8_t *)&RxBuffer_2, Uart_Rx_Cnt_2,0xFFFF); //将收到的信息发送出去
-      //while(HAL_UART_GetState(&UART_HANDLE) == HAL_UART_STATE_BUSY_TX);//检测UART发送结束
-
-      //复位
-			Uart_Rx_Cnt_2 = 0;
-			memset(RxBuffer_2,0x00,sizeof(RxBuffer_2)); //清空数组
-		}
-	}
-	
-	HAL_UART_Receive_IT(&UART_HANDLE, (uint8_t *)&Uart_RxBuffer_2, 1);   //因为接收中断使用了一次即关闭，所以在最后加入这行代码即可实现无限使用
-
+  /* Prevent unused argument(s) compilation warning */
+  uint8_t dr = __HAL_UART_FLUSH_DRREGISTER(huart);
+  protocol_data_recv(&dr, 1);
+  //HAL_UART_IRQHandler(&huart);
+  HAL_UART_Receive_IT(&UART_HANDLE, (uint8_t *)&Uart_RxBuffer_2, 1);   //因为接收中断使用了一次即关闭，所以在最后加入这行代码即可实现无限使用
+    
 }
 
 //串口1错误回调函数(主要用来清除溢出中断)

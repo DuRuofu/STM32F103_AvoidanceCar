@@ -5,6 +5,8 @@
         "app.h": "c",
         "usart_2.h": "c",
         "stdio.h": "c",
-        "usart.h": "c"
-    }
+        "usart.h": "c",
+        "protocol.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

@@ -79,6 +79,30 @@ void Motor_Ctrl(int16_t pwm, uint8_t n)
     }
 }
 
+/**
+ * @description: 电机禁用
+ * @param {  } TB6612_Ctrl
+ * @param {  } TB6612_Ctrl
+ * @return {*}
+ */
+void Motor_Stop(void)
+{
+    TB6612_Ctrl(2,1);
+    TB6612_Ctrl(2,2);
+}
+
+
+/**
+ * @description: 使能电机
+ * @param {  } TB6612_Ctrl
+ * @param {  } TB6612_Ctrl
+ * @return {*}
+ */
+void Motor_Start(void)
+{
+    TB6612_Ctrl(1,1);
+    TB6612_Ctrl(1,2);
+}
 
 /**
  * @description: 控制TB6612驱动芯片驱动模式,

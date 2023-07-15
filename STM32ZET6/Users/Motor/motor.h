@@ -15,6 +15,8 @@
 #include "pwm.h"
 
 void Motor_Init(void);
+void Motor_Start(void);
+void Motor_Stop(void);
 void Motor_Ctrl(int16_t pwm, uint8_t n);
 void TB6612_Ctrl(uint8_t mode,uint8_t n);
 uint16_t my_abs(int16_t n);
