@@ -7,6 +7,7 @@
 /*****************************************************************************/
 #include "main.h"
 #include "usart_2.h"
+#include "debug.h"
 #include "app.h"
 
 #ifdef _cplusplus

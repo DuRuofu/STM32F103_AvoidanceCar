@@ -49,3 +49,5 @@ uint8_t Grayscale_Read(uint8_t *Grayscale_Value)
     Grayscale_Value[3] = HAL_GPIO_ReadPin(Follow_4_GPIO_Port, Follow_4_Pin);
     Grayscale_Value[4] = HAL_GPIO_ReadPin(Follow_5_GPIO_Port, Follow_5_Pin);
 }
+
+

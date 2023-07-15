@@ -35,11 +35,11 @@ void USART2_Init(void)
 //串口2接收完成回调函数
 void UART2_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  /* Prevent unused argument(s) compilation warning */
+  DEBUG_info("pid串口","回调函数");
   uint8_t dr = __HAL_UART_FLUSH_DRREGISTER(huart);
   protocol_data_recv(&dr, 1);
-  //HAL_UART_IRQHandler(&huart);
-  HAL_UART_Receive_IT(&UART_HANDLE, (uint8_t *)&Uart_RxBuffer_2, 1);   //因为接收中断使用了一次即关闭，所以在最后加入这行代码即可实现无限使用
+  DEBUG_info("回调函数","参数：%d",dr);
+  HAL_UART_Receive_IT(&UART_HANDLE, (uint8_t *)&Uart_RxBuffer_2, 1);
     
 }
 

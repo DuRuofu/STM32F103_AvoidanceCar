@@ -19,6 +19,6 @@ void MPU6050_Data_Read(void);
 void Motor_Speed_Read(void);
 void Car_PID_Ctrl(void);
 void Set_PID_Target(float temp_val);
-void Set_PID(float Kp, float Ki, float Kd);
+void Set_PID(float kp, float ki, float kd);
 
 #endif // !__APP_H

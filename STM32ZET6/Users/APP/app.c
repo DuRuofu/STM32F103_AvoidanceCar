@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-15 17-57-38
+ * @LastEditTime: 2023-07-15 20-56-12
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -11,9 +11,16 @@
 #include "app.h"
 #define TAG "APP"
 
+int32_t Cycle =1000; // 采样周期
 int32_t target_speed = 20.0; //目标速度
 int32_t car_speed_1 = 0; // 电机1速度
 int32_t car_speed_2 = 0; // 电机2速度
+
+int32_t Kp = 0; // 比例系数
+int32_t Ki = 0; // 积分系数
+int32_t Kd = 0; // 微分系数
+
+
 
 uint8_t Grayscale_Value[5] = {0}; // 五路灰度模块的值
 
@@ -37,10 +44,10 @@ void App_Init(void)
     Motor_Ctrl(5000, 1);
     //Motor_Ctrl(5000, 2);
     
-    float pid_temp[3] = {1.2, 2.2, 3.2};
+    int32_t pid_temp[3] = {Kp, Ki, Kd};
     set_computer_value(SEND_P_I_D_CMD, CURVES_CH1, pid_temp, 3);     // 给通道 1 发送 P I D 
-    
     set_computer_value(SEND_TARGET_CMD, CURVES_CH1, &target_speed, 1);  // 给通道 1 发送目标值
+    set_computer_value(SEND_PERIOD_CMD, CURVES_CH1, &Cycle, 1);  // 给通道 1 发送周期值
     
     
 }
@@ -51,7 +58,7 @@ void App_Init(void)
  */
 void App_Task(void)
 {
-    LED_Toggle(); // LED心跳
+
     /* 接收数据处理 */
     receiving_process();
 
@@ -60,27 +67,37 @@ void App_Task(void)
     // 显示电机速度
     OLED_ShowSignedNum(1, 1, car_speed_1, 5);
     OLED_ShowSignedNum(1, 8, car_speed_2, 5);
+    OLED_ShowSignedNum(2, 1, Kp, 3);
+    OLED_ShowSignedNum(2, 5, Ki, 3);
+    OLED_ShowSignedNum(2, 9, Kd, 3);
 
-   //DEBUG_info(TAG,"%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
+
+    //DEBUG_info(TAG,"%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
+    HAL_Delay(1);
 
 }
 
 
 // 定时器中断回调函数(1ms一次)
-uint16_t encoder_count = 0;
+uint8_t encoder_count = 0;
+uint8_t LED_Heartbeat = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim == &htim2) // 判断中断是否来自于定时器1
     {
         // 编码器测速任务
         encoder_count++;
-        if (encoder_count == 5)
+        if (encoder_count == 10)
         {
             // 计数值清零
             encoder_count = 0;
             // 读取编码器速度
             Motor_Speed_Read();
         }
+        //心跳
+        LED_Heartbeat++;
+        if(LED_Heartbeat==50){LED_Toggle();}
+        
         //读取灰度模块
         Grayscale_Read(Grayscale_Value);
     }
@@ -110,12 +127,12 @@ void Motor_Speed_Read(void)
  * @param {float} Kd 微分系数 d
  * @return {*} 无
  */
-void Set_PID(float Kp, float Ki, float Kd)
+void Set_PID(float kp, float ki, float kd)
 {
+    Kp = kp;    // 设置比例系数 P
+    Ki = ki;    // 设置积分系数 I
+    Kd = kd;    // 设置微分系数 D
     DEBUG_info(TAG, "Set_PID: Kp=%f, Ki=%f, Kd=%f", Kp, Ki, Kd);
-//    ?= p;    // 设置比例系数 P
-//    ?= i;    // 设置积分系数 I
-//    ?= d;    // 设置微分系数 D
 }
 
 

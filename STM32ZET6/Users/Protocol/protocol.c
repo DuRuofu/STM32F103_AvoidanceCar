@@ -318,6 +318,7 @@ int8_t receiving_process(void)
         
         //set_p_i_d(p_temp, i_temp, d_temp);    // 设置 P I D
         Set_PID(p_temp, i_temp, d_temp);
+        DEBUG_info("pid串口","设置PID");
       }
       break;
 
@@ -327,6 +328,7 @@ int8_t receiving_process(void)
         
         //set_pid_target(actual_temp);    // 设置目标值
         Set_PID_Target(actual_temp);
+        //DEBUG_info("pid串口","设置目标值");
       }
       break;
       
@@ -334,6 +336,7 @@ int8_t receiving_process(void)
       {
         //set_bldcm_enable();              // 启动电机
         Motor_Start();
+        DEBUG_info("pid串口","启动电机");
       }
       break;
       
@@ -341,12 +344,14 @@ int8_t receiving_process(void)
       {
         //set_bldcm_disable();              // 停止电机
         Motor_Stop();
+        DEBUG_info("pid串口","停止电机");
       }
       break;
       
       case RESET_CMD:
       {
         HAL_NVIC_SystemReset();          // 复位系统
+        DEBUG_info("pid串口","复位系统");
       }
       break;
       
