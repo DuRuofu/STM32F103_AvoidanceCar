@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-15 20-56-12
+ * @LastEditTime: 2023-07-16 09-18-11
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -10,15 +10,42 @@
 
 #include "app.h"
 #define TAG "APP"
+#define PWM_MAX 7200
+//-------------------上位机调参用-------------------
+//调参用pid系数
+int32_t Kp = 300; // 比例系数
+int32_t Ki = 10; // 积分系数
+int32_t Kd = 10; // 微分系数
+//调参用采样周期
+int32_t Cycle = 1000; // 采样周期
+//调参用目标值
+int32_t Target = 20; // 目标值
 
-int32_t Cycle =1000; // 采样周期
-int32_t target_speed = 20.0; //目标速度
-int32_t car_speed_1 = 0; // 电机1速度
-int32_t car_speed_2 = 0; // 电机2速度
+//---------------速度环----------------
+int32_t Target_Speed = 20.0; //目标速度
+int32_t Kp_Speed = 0; // 速度环比例系数
+int32_t Ki_Speed = 0; // 速度环积分系数
+int32_t Kd_Speed = 0; // 速度环微分系数
+int32_t L_Speed_Err =0; // 速度环上次误差
+int32_t L_L_Speed_Err =0; // 速度环上上次误差
+int32_t Car_Speed = 0; // 电机实际速度（两电机加和）
+int32_t PWM_Out_Speed = 0; //速度环输出
 
-int32_t Kp = 0; // 比例系数
-int32_t Ki = 0; // 积分系数
-int32_t Kd = 0; // 微分系数
+//---------------转向环----------------
+int32_t Target_Direction = 0; //目标角度
+int32_t Kp_Direction = 0; // 角度环比例系数
+int32_t Ki_Direction = 0; // 角度环积分系数
+int32_t Kd_Direction = 0; // 角度环微分系数
+int32_t Car_Direction = 0; // 实际角度
+int32_t L_Direction_Err = 0; // 角度环上次误差
+int32_t L_L_Direction_Err = 0; // 角度环上上次误差
+int32_t PWM_Out_Direction = 0; // 角度环输出
+
+//----------------最终输出-------------------
+int32_t PWM_Output_1 = 0;
+int32_t PWM_Output_2 = 0;
+
+
 
 
 
@@ -37,19 +64,21 @@ void App_Init(void)
     
     protocol_init();/* 协议初始化 */
 
-    // 开始数据采样
-    HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
+
 
     //控制电机
-    Motor_Ctrl(5000, 1);
+    //Motor_Ctrl(5000, 1);
     //Motor_Ctrl(5000, 2);
     
-    int32_t pid_temp[3] = {Kp, Ki, Kd};
-    set_computer_value(SEND_P_I_D_CMD, CURVES_CH1, pid_temp, 3);     // 给通道 1 发送 P I D 
-    set_computer_value(SEND_TARGET_CMD, CURVES_CH1, &target_speed, 1);  // 给通道 1 发送目标值
+    float pid_temp[3] = {(float)Kp, (float)Ki, (float)Kd};
+    set_computer_value(SEND_P_I_D_CMD, CURVES_CH1, pid_temp, 3); // 给通道 1 发送 P I D 
+    set_computer_value(SEND_TARGET_CMD, CURVES_CH1, &Target, 1); // 给通道 1 发送目标值
     set_computer_value(SEND_PERIOD_CMD, CURVES_CH1, &Cycle, 1);  // 给通道 1 发送周期值
-    
-    
+
+
+
+    // 开始数据采样
+    HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
 }
 
 /**
@@ -58,23 +87,20 @@ void App_Init(void)
  */
 void App_Task(void)
 {
-
-    /* 接收数据处理 */
-    receiving_process();
-
-    set_computer_value(SEND_FACT_CMD, CURVES_CH1, &car_speed_1, 1);     // 给通道 1 发送实际值
+    receiving_process();//协议接收处理(野火上位机)
+    set_computer_value(SEND_FACT_CMD, CURVES_CH1, &Car_Speed, 1); // 给通道 1 发送实际值    
     
     // 显示电机速度
-    OLED_ShowSignedNum(1, 1, car_speed_1, 5);
-    OLED_ShowSignedNum(1, 8, car_speed_2, 5);
-    OLED_ShowSignedNum(2, 1, Kp, 3);
-    OLED_ShowSignedNum(2, 5, Ki, 3);
-    OLED_ShowSignedNum(2, 9, Kd, 3);
-
-
+    OLED_ShowSignedNum(1, 1, Car_Speed, 5);
+    // 显示目标速度
+    OLED_ShowSignedNum(1, 7, Target, 5);
+    // 显示当前调差的PID参数
+    OLED_ShowSignedNum(4, 1, Kp, 3);
+    OLED_ShowSignedNum(4, 6, Ki, 3);
+    OLED_ShowSignedNum(4, 10, Kd, 3);
     //DEBUG_info(TAG,"%d,%d,%d,%d,%d",Grayscale_Value[0],Grayscale_Value[1],Grayscale_Value[2],Grayscale_Value[3],Grayscale_Value[4]);
-    HAL_Delay(1);
-
+    //电机控制任务
+    Car_PID_Ctrl();
 }
 
 
@@ -94,12 +120,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             // 读取编码器速度
             Motor_Speed_Read();
         }
-        //心跳
+        //心跳(50ms一次)
         LED_Heartbeat++;
         if(LED_Heartbeat==50){LED_Toggle();}
-        
+
         //读取灰度模块
-        Grayscale_Read(Grayscale_Value);
+        //Grayscale_Read(Grayscale_Value);
+
+
     }
 }
 
@@ -107,19 +135,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //读取电机速度
 void Motor_Speed_Read(void)
 {
-    // 读取编码器速度
-    car_speed_1 = Encoder_Value(1);
-    car_speed_2 = Encoder_Value(2);
+    // 读取编码器速度(加和)
+    Car_Speed = Encoder_Value(1) + Encoder_Value(2);
     // 清零编码器计数值
     Encoder_Count_Clear(1);
     Encoder_Count_Clear(2);
 }
 
 
-// pid部分
-
-
-
+//--------------------PID控制--------------------
 /**
  * @description: 设置比例、积分、微分系数
  * @param {float} Kp 比例系数 P
@@ -127,16 +151,13 @@ void Motor_Speed_Read(void)
  * @param {float} Kd 微分系数 d
  * @return {*} 无
  */
-void Set_PID(float kp, float ki, float kd)
+void Set_PID(int32_t kp, int32_t ki, int32_t kd)
 {
-    Kp = kp;    // 设置比例系数 P
-    Ki = ki;    // 设置积分系数 I
-    Kd = kd;    // 设置微分系数 D
-    DEBUG_info(TAG, "Set_PID: Kp=%f, Ki=%f, Kd=%f", Kp, Ki, Kd);
+    Kp = (int32_t)kp;    // 设置比例系数 P
+    Ki = (int32_t)ki;    // 设置积分系数 I
+    Kd = (int32_t)kd;    // 设置微分系数 D
+    DEBUG_info(TAG, "Set_PID: Kp=%u, Ki=%u, Kd=%u", Kp, Ki, Kd);
 }
-
-
-
 
 /**
  * @description: 设置当前的目标值
@@ -146,53 +167,119 @@ void Set_PID(float kp, float ki, float kd)
 void Set_PID_Target(float temp_val)
 {
   DEBUG_info(TAG, "set_pid_target: %f", temp_val);
-  target_speed = temp_val;    // 设置当前的目标值
+  Target = temp_val;    // 设置当前的目标值
 }
 
 
 
 
-// /**
-//  * @description: 小车PID总输出
-//  * @return {*}
-//  */
-// void Car_PID_Ctrl(void)
-// {
-//     // 直立环
-//     PWM_Upright = PID_Upright(pitch, gyroy);
-//     // 速度环
-//     PWM_Speed = PID_Speed(car_speed_1, car_speed_2);
+/**
+ * @description: 速度环(待修改)
+ * @param {int32_t} target_speed
+ * @param {int32_t} fact_speed
+ * @return {*}
+ */
+int32_t PID_Speed(int32_t target_speed, int32_t fact_speed)
+{
+    static int32_t Speed_PWM_Out=0,Err_Speed=0; // 速度环输出
+    Err_Speed = target_speed - fact_speed ; // 计算速度误差
+    // DEBUG_info(TAG, "PID_Speed: PWM_Out=%u", Speed_PWM_Out);
+    // DEBUG_info(TAG, "PID_Speed: Err_Speed=%u", Err_Speed);
+    // 死区限制
+    if (Err_Speed > -1 && Err_Speed < 1)
+    {
+        Err_Speed = 0;
+    }
+    // else
+    {
+        //PID计算(增量)
+        //PWM_Out += Kp_Speed * (Err_Speed-L_Speed_Err) + Ki_Speed * Err_Speed + Kd_Speed * (Err_Speed - 2*L_Speed_Err + L_L_Speed_Err);
+        //调参用
+        Speed_PWM_Out = Speed_PWM_Out +  Kp * (Err_Speed-L_Speed_Err) + Ki * Err_Speed + Kd * (Err_Speed - 2.0*L_Speed_Err + L_L_Speed_Err);
+    }
+    //限幅
+    if (Speed_PWM_Out > 7200)
+    {
+        Speed_PWM_Out = 7200;
+    }
+    else if (Speed_PWM_Out < -7200)
+    {
+        Speed_PWM_Out = -7200;
+    }
+    //保存误差
+    L_Speed_Err = Err_Speed; // 保存上一次的误差
+    L_L_Speed_Err = L_Speed_Err; // 保存上上次的误差
+    //DEBUG_info(TAG, "PID_Speed: PWM_Out=%u", Speed_PWM_Out);
+    return Speed_PWM_Out;
+}
 
-//     // 转向环
 
-//     // 最终输出PWM
-//     PWM_Output_1 = PWM_Upright+PWM_Speed;
-//     PWM_Output_2 = PWM_Upright+PWM_Speed;
 
-//     // 限幅
-//     if (PWM_Output_1 >= PWM_MAX)
-//     {
-//         PWM_Output_1 = PWM_MAX;
-//     }
-//     if (PWM_Output_1 <= -PWM_MAX)
-//     {
-//         PWM_Output_1 = -PWM_MAX;
-//     }
-//     if (PWM_Output_2 >= PWM_MAX)
-//     {
-//         PWM_Output_2 = PWM_MAX;
-//     }
-//     if (PWM_Output_2 <= -PWM_MAX)
-//     {
-//         PWM_Output_2 = -PWM_MAX;
-//     }
-//     if ((pitch >= 80) || (pitch <= -80))
-//     {
-//         PWM_Output_1 = 0;
-//         PWM_Output_2 = 0;
-//     }
-//     // 作用到电机
-//     Motor_Ctrl(PWM_Output_1, 1); // 作用到电机
-//     Motor_Ctrl(PWM_Output_2, 2); // 作用到电机
-// }
+/**
+ * @description: 转向环(待修改)
+ * @param {int32_t} target_direction
+ * @param {int32_t} fact_direction
+ * @return {*}
+ */
+int32_t PID_Direction(int32_t target_direction, int32_t fact_direction)
+{
+    static int32_t Direction_PWM_Out=0,Err_Direction=0; // 转向环输出
+    Err_Direction = target_direction - fact_direction ; // 计算转向误差
+    //逻辑。。。。。。。。。。。。。
+    
+    
+    //限幅
+    if (Direction_PWM_Out > 7200)
+    {
+        Direction_PWM_Out = 7200;
+    }
+    else if (Direction_PWM_Out < -7200)
+    {
+        Direction_PWM_Out = -7200;
+    }
+    //保存误差
+    L_Direction_Err = Err_Direction; // 保存上一次的误差
+    L_L_Direction_Err = L_Direction_Err; // 保存上上次的误差
+    return Direction_PWM_Out;
+}
+
+
+
+/**
+ * @description: 小车PID总输出
+ * @return {*}
+ */
+void Car_PID_Ctrl(void)
+{
+    // 速度环
+    PWM_Out_Speed = PID_Speed(Target, Car_Speed);
+
+    // 转向环
+
+    // 最终输出PWM
+    PWM_Output_1 = PWM_Out_Speed;
+    PWM_Output_2 = PWM_Out_Speed;
+
+    // 限幅
+    if (PWM_Output_1 >= PWM_MAX)
+    {
+        PWM_Output_1 = PWM_MAX;
+    }
+    else if (PWM_Output_1 <= -PWM_MAX)
+    {
+        PWM_Output_1 = -PWM_MAX;
+    }
+    else if (PWM_Output_2 >= PWM_MAX)
+    {
+        PWM_Output_2 = PWM_MAX;
+    }
+    else if (PWM_Output_2 <= -PWM_MAX)
+    {
+        PWM_Output_2 = -PWM_MAX;
+    }
+    // 作用到电机
+    Motor_Ctrl(PWM_Output_1, 1); // 作用到电机
+    Motor_Ctrl(PWM_Output_2, 2); // 作用到电机
+    //DEBUG_info(TAG, "Car_PID_Ctrl: %u,%u", PWM_Output_1, PWM_Output_2);
+}
 
