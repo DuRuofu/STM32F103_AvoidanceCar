@@ -459,9 +459,14 @@
               <FilePath>..\Users\PWM\pwm.c</FilePath>
             </File>
             <File>
-              <FileName>debug.c</FileName>
+              <FileName>Grayscale.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Users\USART\debug.c</FilePath>
+              <FilePath>..\Users\Grayscale\Grayscale.c</FilePath>
+            </File>
+            <File>
+              <FileName>protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\Protocol\protocol.c</FilePath>
             </File>
             <File>
               <FileName>serial_it_config.c</FileName>
@@ -469,9 +474,9 @@
               <FilePath>..\Users\USART\serial_it_config.c</FilePath>
             </File>
             <File>
-              <FileName>Grayscale.c</FileName>
+              <FileName>debug.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Users\Grayscale\Grayscale.c</FilePath>
+              <FilePath>..\Users\USART\debug.c</FilePath>
             </File>
             <File>
               <FileName>usart_2.c</FileName>
@@ -479,9 +484,14 @@
               <FilePath>..\Users\USART\usart_2.c</FilePath>
             </File>
             <File>
-              <FileName>protocol.c</FileName>
+              <FileName>usart_3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Users\Protocol\protocol.c</FilePath>
+              <FilePath>..\Users\USART\usart_3.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart_4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\USART\usart_4.c</FilePath>
             </File>
           </Files>
         </Group>
