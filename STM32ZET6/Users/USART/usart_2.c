@@ -4,7 +4,7 @@
  * @LastEditors: DuRuofu
  * @LastEditTime: 2023-07-16 07-32-56
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\usart_2.c
- * @Description: 串口2的驱动代码(用于蓝牙调试)
+ * @Description: 串口2的驱动代码(用于调试PID)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
  */
 

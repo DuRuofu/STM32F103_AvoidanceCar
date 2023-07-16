@@ -1,18 +1,12 @@
-/**
-  ******************************************************************************
-  * @file    protocol.c
-  * @version V1.0
-  * @date    2020-xx-xx
-  * @brief   野火PID调试助手通讯协议解析
-  ******************************************************************************
-  * @attention
-  *
-  * 实验平台:野火 F407 开发板 
-  * 论坛    :http://www.firebbs.cn
-  * 淘宝    :https://fire-stm32.taobao.com
-  *
-  ******************************************************************************
-  */ 
+/*
+ * @Author: DuRuofu duruofu@qq.com
+ * @Date: 2023-07-15 15-19-59
+ * @LastEditors: DuRuofu
+ * @LastEditTime: 2023-07-16 11-56-00
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\Protocol\protocol.c
+ * @Description: 野火PID调试助手通讯协议解析
+ * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
+ */
 
 #include "protocol.h"
 #include <string.h>

@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-16 09-18-11
+ * @LastEditTime: 2023-07-16 11-57-38
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -126,8 +126,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
         //读取灰度模块
         //Grayscale_Read(Grayscale_Value);
-
-
+        Car_Direction = Grayscale_Read_Err();
     }
 }
 
