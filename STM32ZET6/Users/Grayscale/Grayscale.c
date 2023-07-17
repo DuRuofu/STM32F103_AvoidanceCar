@@ -2,13 +2,13 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 16-08-26
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-16 11-50-19
+ * @LastEditTime: 2023-07-17 08-00-10
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\Grayscale\Grayscale.c
  * @Description: 五路灰度模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
  */
 #include "Grayscale.h"
-
+#include "debug.h"
 
 
 // 不使用使用CubeMX自动生成的宏定义，就使用下面的：
@@ -53,7 +53,6 @@ uint8_t Grayscale_Read(uint8_t *Grayscale_Value)
 
 /**
  * @description: 读取五路灰度模块的误差
- * @param {int32_t} Err_Weight
  * @param {int32_t} weight_sum
  * @return {*}
  */
@@ -65,10 +64,9 @@ int32_t Grayscale_Read_Err()
     int32_t weight_sum = 0;
     uint8_t Grayscale_Value[5] = {0};
     Grayscale_Read(Grayscale_Value);
-    
     // 计算误差权重和
     for (int i = 0; i < 5; i++) {
-        weight_sum += (int32_t)!Grayscale_Value[i] * Err_Weight[i];
+        weight_sum += (int32_t)Grayscale_Value[i] * Err_Weight[i];
     }
     return weight_sum;
 }
