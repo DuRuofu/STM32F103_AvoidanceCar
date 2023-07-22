@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-16 07-33-08
+ * @LastEditTime: 2023-07-18 17-30-08
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\USART\serial_it_config.c
  * @Description: 串口接收中断配置(总)
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -20,8 +20,8 @@ void USART_IT_Config(void)
     Debug_Init();
     //串口2接收中断初始化
     USART2_Init();
-
     //串口3接收中断初始化
+    USART3_Init();
 }
 
 //串口接收完成回调函数
@@ -39,6 +39,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     else if(huart->Instance == USART3)
     {
         //UART2_RxCpltCallback();
+        UART3_RxCpltCallback(huart);
     }
     }
 
@@ -52,11 +53,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
     else if(huart->Instance == USART2)
     {
-        UART2_ErrorCallback();
+        UART2_ErrorCallback(huart);
     }
     else if(huart->Instance == USART3)
     {
-        //UART3_ErrorCallback();
+        UART3_ErrorCallback(huart);
     } 
 }
 

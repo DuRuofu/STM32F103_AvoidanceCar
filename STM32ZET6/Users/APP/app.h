@@ -1,6 +1,8 @@
 #ifndef __APP_H
 #define __APP_H
 
+#include <stdlib.h>
+#include <string.h>
 #include "main.h"
 #include "tim.h"
 #include "led.h"
@@ -10,6 +12,7 @@
 #include "serial_it_config.h"
 #include "Grayscale.h"
 #include "protocol.h"
+#include "cJSON.h"
 
 
 

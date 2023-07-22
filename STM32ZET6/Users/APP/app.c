@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-17 08-50-24
+ * @LastEditTime: 2023-07-22 17-20-26
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved.
@@ -81,10 +81,13 @@ void App_Task(void)
     OLED_ShowSignedNum(4, 10, Kd, 3);
 
     // 读取灰度模块作为实际方向
-    Car_Direction = Grayscale_Read_Err();
+    // = Grayscale_Read_Err();
 
     // 电机控制任务
-    Car_PID_Ctrl();
+    //Car_PID_Ctrl();
+
+
+    
 }
 
 // 定时器中断回调函数(1ms一次)

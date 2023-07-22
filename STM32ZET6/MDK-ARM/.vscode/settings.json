@@ -7,7 +7,9 @@
         "stdio.h": "c",
         "usart.h": "c",
         "protocol.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "usart_3.h": "c",
+        "serial_it_config.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
