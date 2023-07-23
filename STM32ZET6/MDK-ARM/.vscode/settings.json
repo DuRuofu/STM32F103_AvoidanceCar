@@ -9,7 +9,9 @@
         "protocol.h": "c",
         "string.h": "c",
         "usart_3.h": "c",
-        "serial_it_config.h": "c"
+        "serial_it_config.h": "c",
+        "typeinfo": "c",
+        "cjson.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
