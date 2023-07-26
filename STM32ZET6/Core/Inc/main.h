@@ -57,12 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define KEY_2_Pin GPIO_PIN_3
+#define KEY_2_Pin GPIO_PIN_4
 #define KEY_2_GPIO_Port GPIOE
-#define KEY_1_Pin GPIO_PIN_4
-#define KEY_1_GPIO_Port GPIOE
-#define LED_2_Pin GPIO_PIN_5
-#define LED_2_GPIO_Port GPIOE
+#define KEY_1_Pin GPIO_PIN_0
+#define KEY_1_GPIO_Port GPIOA
 #define PWM_1_Pin GPIO_PIN_9
 #define PWM_1_GPIO_Port GPIOE
 #define AIN1_Pin GPIO_PIN_10
@@ -83,14 +81,14 @@ void Error_Handler(void);
 #define Follow_2_GPIO_Port GPIOB
 #define Follow_1_Pin GPIO_PIN_4
 #define Follow_1_GPIO_Port GPIOB
-#define LED_1_Pin GPIO_PIN_5
-#define LED_1_GPIO_Port GPIOB
 #define Follow_3_Pin GPIO_PIN_7
 #define Follow_3_GPIO_Port GPIOB
 #define Follow_4_Pin GPIO_PIN_8
 #define Follow_4_GPIO_Port GPIOB
-#define Follow_5_Pin GPIO_PIN_9
-#define Follow_5_GPIO_Port GPIOB
+#define LED_1_Pin GPIO_PIN_9
+#define LED_1_GPIO_Port GPIOB
+#define Follow_5_Pin GPIO_PIN_0
+#define Follow_5_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

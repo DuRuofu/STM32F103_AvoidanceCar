@@ -60,6 +60,8 @@ void App_Init(void)
 
     // 开始数据采样
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
+    //Motor_Ctrl(-400, 1); // 作用到电机
+    //Motor_Ctrl(-1200, 2); // 作用到电机
 }
 
 /**
@@ -85,6 +87,7 @@ void App_Task(void)
 
     // 电机控制任务
     //Car_PID_Ctrl();
+
 
 
     
