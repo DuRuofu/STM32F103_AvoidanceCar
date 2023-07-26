@@ -60,7 +60,7 @@ void Motor_Ctrl(int16_t pwm, uint8_t n)
         {
             TB6612_Ctrl(0,1);
         }
-        PWMA_Set(pwm_num);
+        Motor_PWMA_Set(pwm_num);
         break;
     case 2:
         if(pwm >= 0)
@@ -72,7 +72,7 @@ void Motor_Ctrl(int16_t pwm, uint8_t n)
         {
             TB6612_Ctrl(0,2);
         }
-        PWMB_Set(pwm_num);
+        Motor_PWMB_Set(pwm_num);
         break;    
     default:
         break;

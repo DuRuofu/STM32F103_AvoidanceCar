@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-26 20-59-03
+ * @LastEditTime: 2023-07-26 21-26-30
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved.
@@ -72,6 +72,8 @@ void App_Init(void)
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
     //Motor_Ctrl(-400, 1); // 作用到电机
     //Motor_Ctrl(-1200, 2); // 作用到电机
+    OLED_ShowSignedNum(1, 1, 11221, 5);
+    //OLED_ShowString(2,2,"1234567890");
 }
 
 /**
@@ -84,22 +86,18 @@ void App_Task(void)
     set_computer_value(SEND_FACT_CMD, CURVES_CH1, &Car_Speed, 1); // 给通道 1 发送实际值
 
     // 显示电机速度
-    OLED_ShowSignedNum(1, 1, Car_Speed, 5);
-    // 显示目标速度
-    OLED_ShowSignedNum(1, 7, Target, 5);
-    // 显示当前调差的PID参数
-    OLED_ShowSignedNum(4, 1, Kp, 3);
-    OLED_ShowSignedNum(4, 6, Ki, 3);
-    OLED_ShowSignedNum(4, 10, Kd, 3);
+    // OLED_ShowSignedNum(1, 1, Car_Speed, 5);
+    // // 显示目标速度
+    // OLED_ShowSignedNum(1, 7, Target, 5);
+    // // 显示当前调差的PID参数
+    // OLED_ShowSignedNum(4, 1, Kp, 3);
+    // OLED_ShowSignedNum(4, 6, Ki, 3);
+    // OLED_ShowSignedNum(4, 10, Kd, 3);
 
     // 读取灰度模块作为实际方向
     // = Grayscale_Read_Err();
     // 电机控制任务
     //Car_PID_Ctrl();
-
-
-
-    
 }
 
 // 定时器中断回调函数(1ms一次)
