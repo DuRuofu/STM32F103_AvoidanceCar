@@ -58,6 +58,16 @@ void App_Init(void)
     set_computer_value(SEND_TARGET_CMD, CURVES_CH1, &Target, 1); // 给通道 1 发送目标值
     set_computer_value(SEND_PERIOD_CMD, CURVES_CH1, &Cycle, 1);  // 给通道 1 发送周期值
 
+
+    //-----lcd测试-------
+    LCD_BLK = 1;
+    LCD_Clear(RED);
+    //LCD_Showimage(14, 0, 100, 50, gImage_11);
+    //LCD_DrawFont_GBK16(24, 60, BLUE, WHITE, "111");
+    //LCD_DrawFont_GBK16(28, 80, RED, WHITE, "22222");
+    LCD_DrawFont_GBK16(8, 100, BLACK, WHITE, "333333");
+    //-----lcd测试-------
+
     // 开始数据采样
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
     //Motor_Ctrl(-400, 1); // 作用到电机

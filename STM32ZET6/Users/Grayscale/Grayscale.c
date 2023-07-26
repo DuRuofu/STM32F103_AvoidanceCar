@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 16-08-26
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-17 08-00-10
+ * @LastEditTime: 2023-07-26 20-23-05
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\Grayscale\Grayscale.c
  * @Description: 五路灰度模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
@@ -56,7 +56,7 @@ uint8_t Grayscale_Read(uint8_t *Grayscale_Value)
  * @param {int32_t} weight_sum
  * @return {*}
  */
-int32_t Grayscale_Read_Err()
+int32_t Grayscale_Read_Err(void)
 {   
     // 五路灰度模块误差的权重(人为设定)
     int32_t Err_Weight[5] = {100, 50, 0, -50, -100};

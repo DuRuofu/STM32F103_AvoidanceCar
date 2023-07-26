@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "stdio.h"
 #include "main.h"
 #include "tim.h"
 #include "led.h"
@@ -13,7 +14,8 @@
 #include "Grayscale.h"
 #include "protocol.h"
 #include "cJSON.h"
-
+#include "LCD.h"
+//#include "Picture.h"
 
 
 void App_Init(void);
