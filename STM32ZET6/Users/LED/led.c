@@ -2,14 +2,13 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-07 09-36-03
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-07 17-57-40
- * @FilePath: \MDK-ARMd:\duruofu\Project\balancedVehicle\code\project\STM32code\User\LED\led.c
+ * @LastEditTime: 2023-07-26 20-30-03
+ * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\LED\led.c
  * @Description: 控制一个led灯
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved. 
  */
 
 #include "led.h"
-
 
 /**
   * @brief  LED初始化
@@ -39,9 +38,16 @@ void LED_Init(void)
   * @param  无
   * @retval 无
   */
-void LED_On(void)
+void LED_On(uint8_t led_num)
 {
-    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+    if (led_num == 1)
+    {
+      HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+    }
+    else if(led_num == 2)
+    {
+      HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+    }
 }
 
 
@@ -50,9 +56,16 @@ void LED_On(void)
   * @param  无
   * @retval 无
   */
-void LED_Off(void)
+void LED_Off(uint8_t led_num)
 {
-    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
+    if (led_num == 1)
+    {
+      HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
+    }
+    else if(led_num == 2)
+    {
+      HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+    }   
 }
 
 
@@ -61,8 +74,16 @@ void LED_Off(void)
   * @param  无
   * @retval 无
   */
-void LED_Toggle(void)
+void LED_Toggle(uint8_t led_num)
 {
-    HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+    
+    if (led_num == 1)
+    {
+     HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+    }
+    else if(led_num == 2)
+    {
+      HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
+    }  
 }
 

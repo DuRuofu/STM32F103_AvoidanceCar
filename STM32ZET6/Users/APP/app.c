@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-22 17-20-26
+ * @LastEditTime: 2023-07-26 20-59-03
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved.
@@ -60,12 +60,12 @@ void App_Init(void)
 
 
     //-----lcd测试-------
-    LCD_BLK = 1;
-    LCD_Clear(RED);
-    //LCD_Showimage(14, 0, 100, 50, gImage_11);
-    //LCD_DrawFont_GBK16(24, 60, BLUE, WHITE, "111");
-    //LCD_DrawFont_GBK16(28, 80, RED, WHITE, "22222");
-    LCD_DrawFont_GBK16(8, 100, BLACK, WHITE, "333333");
+    // LCD_BLK = 1;
+    // LCD_Clear(RED);
+    // //LCD_Showimage(14, 0, 100, 50, gImage_11);
+    // //LCD_DrawFont_GBK16(24, 60, BLUE, WHITE, "111");
+    // //LCD_DrawFont_GBK16(28, 80, RED, WHITE, "22222");
+    // LCD_DrawFont_GBK16(8, 100, BLACK, WHITE, "333333");
     //-----lcd测试-------
 
     // 开始数据采样
@@ -94,7 +94,6 @@ void App_Task(void)
 
     // 读取灰度模块作为实际方向
     // = Grayscale_Read_Err();
-
     // 电机控制任务
     //Car_PID_Ctrl();
 
@@ -123,7 +122,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         LED_Heartbeat++;
         if (LED_Heartbeat == 50)
         {
-            LED_Toggle();
+            LED_Toggle(1);
+            
         }
 
 
