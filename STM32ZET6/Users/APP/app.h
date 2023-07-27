@@ -14,7 +14,7 @@
 #include "Grayscale.h"
 #include "protocol.h"
 #include "cJSON.h"
-
+#include "gui.h"
 
 
 void App_Init(void);

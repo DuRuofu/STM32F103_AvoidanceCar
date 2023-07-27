@@ -1,9 +1,11 @@
 #include "key.h"
-
 #include "led.h"
+#include "gui.h"
 
 #define KEY1_Pin KEY_1_Pin
 #define KEY2_Pin KEY_2_Pin
+
+uint8_t GUI_Menu = 0;
 
 
 /**
@@ -19,6 +21,14 @@ void Key_1_Callback(void)
 {
     // 按键1按下的处理代码
     LED_Toggle(2);
+    if (GUI_Menu < 2)
+    {
+        GUI_Menu++;
+    }
+    else
+    {
+        GUI_Menu = 0;
+    }
 }
 
 
@@ -26,6 +36,14 @@ void Key_2_Callback(void)
 {
     // 按键2按下的处理代码
     LED_Toggle(2);
+    if (GUI_Menu > 0)
+    {
+        GUI_Menu--;
+    }
+    else
+    {
+        GUI_Menu = 2;
+    }
 }
 
 

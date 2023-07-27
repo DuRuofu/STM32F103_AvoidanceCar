@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Users/APP;../Users/Encoder;../Users/Motor;..\Users\OLED;../Users/PWM;../Users/USART;../Users/LED;../Users/Grayscale;../Users/Protocol;../Users/CJSON;../Users/LCD;../Users/KEY;..\Users\YunTai;..\Users\ADC;..\Users\CCD</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Users/APP;../Users/Encoder;../Users/Motor;..\Users\OLED;../Users/PWM;../Users/USART;../Users/LED;../Users/Grayscale;../Users/Protocol;../Users/CJSON;../Users/LCD;../Users/KEY;..\Users\YunTai;..\Users\ADC;..\Users\CCD;..\Users\OLED\OLEDGUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -449,6 +449,11 @@
               <FilePath>..\Users\Motor\motor.c</FilePath>
             </File>
             <File>
+              <FileName>yuntai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\YunTai\yuntai.c</FilePath>
+            </File>
+            <File>
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\PWM\pwm.c</FilePath>
@@ -494,21 +499,6 @@
               <FilePath>..\Users\CJSON\cJSON.c</FilePath>
             </File>
             <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Users\KEY\key.c</FilePath>
-            </File>
-            <File>
-              <FileName>key.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\KEY\key.h</FilePath>
-            </File>
-            <File>
-              <FileName>yuntai.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Users\YunTai\yuntai.c</FilePath>
-            </File>
-            <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\ADC\adc.c</FilePath>
@@ -522,6 +512,16 @@
               <FileName>OLED.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\OLED\OLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\KEY\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\OLED\OLEDGUI\gui.c</FilePath>
             </File>
           </Files>
         </Group>

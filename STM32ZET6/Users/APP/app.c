@@ -73,6 +73,7 @@ void App_Init(void)
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
     //Motor_Ctrl(-400, 1); // 作用到电机
     //Motor_Ctrl(-1200, 2); // 作用到电机
+    
 
 }
 
@@ -82,8 +83,8 @@ void App_Init(void)
  */
 void App_Task(void)
 {
-    receiving_process();                                          // 协议接收处理(野火上位机)
-    set_computer_value(SEND_FACT_CMD, CURVES_CH1, &Car_Speed, 1); // 给通道 1 发送实际值
+    //receiving_process();                                          // 协议接收处理(野火上位机)
+    //set_computer_value(SEND_FACT_CMD, CURVES_CH1, &Car_Speed, 1); // 给通道 1 发送实际值
 
     // 显示电机速度
     // OLED_ShowSignedNum(1, 1, Car_Speed, 5);
@@ -98,6 +99,7 @@ void App_Task(void)
     // = Grayscale_Read_Err();
     // 电机控制任务
     //Car_PID_Ctrl();
+    Menu_Refresh(); // 刷新菜单
 }
 
 // 定时器中断回调函数(1ms一次)

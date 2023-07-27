@@ -15,7 +15,9 @@
         "led.h": "c",
         "key.h": "c",
         "oled.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "gui.h": "c",
+        "motor.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
