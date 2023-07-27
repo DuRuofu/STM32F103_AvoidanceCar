@@ -65,6 +65,12 @@ void Error_Handler(void);
 #define KEY_1_Pin GPIO_PIN_0
 #define KEY_1_GPIO_Port GPIOA
 #define KEY_1_EXTI_IRQn EXTI0_IRQn
+#define CCD_AO_Pin GPIO_PIN_4
+#define CCD_AO_GPIO_Port GPIOA
+#define CCD_CLK_Pin GPIO_PIN_5
+#define CCD_CLK_GPIO_Port GPIOA
+#define CCD_SI_Pin GPIO_PIN_6
+#define CCD_SI_GPIO_Port GPIOA
 #define TFT_6_Pin GPIO_PIN_5
 #define TFT_6_GPIO_Port GPIOC
 #define TFT_5_Pin GPIO_PIN_1

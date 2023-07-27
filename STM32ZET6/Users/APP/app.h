@@ -15,7 +15,7 @@
 #include "protocol.h"
 #include "cJSON.h"
 #include "gui.h"
-
+#include "ccd.h"
 
 void App_Init(void);
 void App_Task(void);

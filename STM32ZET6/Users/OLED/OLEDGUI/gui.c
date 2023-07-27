@@ -10,7 +10,9 @@
 
 #include "gui.h"
 #include <stdio.h>
+
 extern  uint8_t GUI_Menu ;
+
 
 uint8_t str_buff1[64];
 uint8_t str_buff2[64];

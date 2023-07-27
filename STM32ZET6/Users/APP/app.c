@@ -2,7 +2,7 @@
  * @Author: DuRuofu duruofu@qq.com
  * @Date: 2023-07-13 17-13-53
  * @LastEditors: DuRuofu
- * @LastEditTime: 2023-07-26 21-26-30
+ * @LastEditTime: 2023-07-27 21-23-17
  * @FilePath: \MDK-ARMd:\duruofu\Project\Avoidance_Car\project\STM32ZET6\Users\APP\app.c
  * @Description: 应用层模块
  * Copyright (c) 2023 by duruofu@foxmail.com All Rights Reserved.
@@ -41,6 +41,7 @@ int32_t PWM_Output_1 = 0;
 int32_t PWM_Output_2 = 0;
 
 uint8_t Grayscale_Value[5] = {0}; // 五路灰度模块的值
+uint16_t CCD_Value[128]={0};
 
 /**
  * @description: 系统应用初始化
@@ -86,25 +87,27 @@ void App_Task(void)
     //receiving_process();                                          // 协议接收处理(野火上位机)
     //set_computer_value(SEND_FACT_CMD, CURVES_CH1, &Car_Speed, 1); // 给通道 1 发送实际值
 
-    // 显示电机速度
-    // OLED_ShowSignedNum(1, 1, Car_Speed, 5);
-    // // 显示目标速度
-    // OLED_ShowSignedNum(1, 7, Target, 5);
-    // // 显示当前调差的PID参数
-    // OLED_ShowSignedNum(4, 1, Kp, 3);
-    // OLED_ShowSignedNum(4, 6, Ki, 3);
-    // OLED_ShowSignedNum(4, 10, Kd, 3);
 
     // 读取灰度模块作为实际方向
-    // = Grayscale_Read_Err();
+    //  Grayscale_Read_Err();
     // 电机控制任务
     //Car_PID_Ctrl();
     Menu_Refresh(); // 刷新菜单
+    // 发送CCD数据
+    printf("CCD_Value:");
+    for(int i = 0; i < 128; i++)
+    {
+        printf("%d ", CCD_Value[i]);
+    }
+    printf("\r\n");
+
+
 }
 
 // 定时器中断回调函数(1ms一次)
 uint8_t encoder_count = 0;
 uint8_t LED_Heartbeat = 0;
+uint8_t CCD_Count = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim == &htim2) // 判断中断是否来自于定时器1
@@ -122,8 +125,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         LED_Heartbeat++;
         if (LED_Heartbeat == 50)
         {
-            LED_Toggle(1);
-            
+            LED_Toggle(1);      
+        }
+
+        //CCD采样
+        CCD_Count++;
+        if (CCD_Count == 30)
+        {
+            // 计数值清零
+            CCD_Count = 0;
+            // 读取编码器速度
+            CCD_Collect();
         }
 
 

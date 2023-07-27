@@ -17,7 +17,8 @@
         "oled.h": "c",
         "stdint.h": "c",
         "gui.h": "c",
-        "motor.h": "c"
+        "motor.h": "c",
+        "ccd.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
