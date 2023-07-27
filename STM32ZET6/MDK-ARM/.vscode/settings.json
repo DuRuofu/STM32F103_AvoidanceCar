@@ -13,7 +13,9 @@
         "typeinfo": "c",
         "cjson.h": "c",
         "led.h": "c",
-        "key.h": "c"
+        "key.h": "c",
+        "oled.h": "c",
+        "stdint.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

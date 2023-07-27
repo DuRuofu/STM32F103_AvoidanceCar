@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Users/APP;../Users/Encoder;../Users/Motor;../Users/OLED;../Users/PWM;../Users/USART;../Users/LED;../Users/Grayscale;../Users/Protocol;../Users/CJSON;../Users/LCD;../Users/KEY;..\Users\YunTai;..\Users\ADC;..\Users\CCD</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Users/APP;../Users/Encoder;../Users/Motor;..\Users\OLED;../Users/PWM;../Users/USART;../Users/LED;../Users/Grayscale;../Users/Protocol;../Users/CJSON;../Users/LCD;../Users/KEY;..\Users\YunTai;..\Users\ADC;..\Users\CCD</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -449,11 +449,6 @@
               <FilePath>..\Users\Motor\motor.c</FilePath>
             </File>
             <File>
-              <FileName>oled.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Users\OLED\oled.c</FilePath>
-            </File>
-            <File>
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\PWM\pwm.c</FilePath>
@@ -499,11 +494,6 @@
               <FilePath>..\Users\CJSON\cJSON.c</FilePath>
             </File>
             <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Users\LCD\LCD.c</FilePath>
-            </File>
-            <File>
               <FileName>key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\KEY\key.c</FilePath>
@@ -527,6 +517,11 @@
               <FileName>ccd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\CCD\ccd.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Users\OLED\OLED.c</FilePath>
             </File>
           </Files>
         </Group>

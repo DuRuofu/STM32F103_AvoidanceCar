@@ -1,27 +1,22 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM32ZET6_CAR'
-compiling led.c...
-..\Users\LED\led.c(49): error:  #20: identifier "LED_2_GPIO_Port" is undefined
-        HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
-..\Users\LED\led.c(49): error:  #20: identifier "LED_2_Pin" is undefined
-        HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
-..\Users\LED\led.c(67): error:  #20: identifier "LED_2_GPIO_Port" is undefined
-        HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
-..\Users\LED\led.c(67): error:  #20: identifier "LED_2_Pin" is undefined
-        HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
-..\Users\LED\led.c(86): error:  #20: identifier "LED_2_GPIO_Port" is undefined
-        HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
-..\Users\LED\led.c(86): error:  #20: identifier "LED_2_Pin" is undefined
-        HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
-..\Users\LED\led.c: 0 warnings, 6 errors
-compiling pwm.c...
-..\Users\PWM\pwm.c(15): warning:  #47-D: incompatible redefinition of macro "TIM1"  (declared at line 869 of "../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h")
-  #define TIM1  htim5
-..\Users\PWM\pwm.c(56): error:  #20: identifier "PWM_CHANNEL_A" is undefined
-      __HAL_TIM_SET_COMPARE(&TIM, PWM_CHANNEL_A, pwm_d);
-..\Users\PWM\pwm.c(66): error:  #20: identifier "PWM_CHANNEL_B" is undefined
-      __HAL_TIM_SET_COMPARE(&TIM, PWM_CHANNEL_B, pwm_d);
-..\Users\PWM\pwm.c: 1 warning, 2 errors
-"..\Output\STM32ZET6_CAR.axf" - 8 Error(s), 1 Warning(s).
-Target not created.
-Build Time Elapsed:  00:00:04
+compiling app.c...
+compiling stm32f1xx_it.c...
+compiling OLED.c...
+compiling main.c...
+compiling usart_2.c...
+..\Users\USART\usart_2.c(41): warning:  #870-D: invalid multibyte character sequence
+    DEBUG_info("回调函数","参数�?%d",dr);
+..\Users\USART\usart_2.c: 1 warning, 0 errors
+compiling serial_it_config.c...
+..\Users\USART\serial_it_config.c(22): warning:  #223-D: function "USART2_Init" declared implicitly
+      USART2_Init();
+..\Users\USART\serial_it_config.c(24): warning:  #223-D: function "USART3_Init" declared implicitly
+      USART3_Init();
+..\Users\USART\serial_it_config.c: 2 warnings, 0 errors
+compiling protocol.c...
+linking...
+Program Size: Code=20498 RO-data=2514 RW-data=128 ZI-data=2848  
+FromELF: creating hex file...
+"..\Output\STM32ZET6_CAR.axf" - 0 Error(s), 3 Warning(s).
+Build Time Elapsed:  00:00:08

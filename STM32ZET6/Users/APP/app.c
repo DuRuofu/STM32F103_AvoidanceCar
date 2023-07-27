@@ -49,6 +49,7 @@ uint8_t Grayscale_Value[5] = {0}; // 五路灰度模块的值
 void App_Init(void)
 {
     OLED_Init();          // 0.96oled初始化
+    OLED_Clear();
     Motor_Init();         // 电机初始化
     USART_IT_Config();    // 总串口接收初始化
     Encoder_Count_Init(); // 编码器计数初始化
@@ -72,8 +73,7 @@ void App_Init(void)
     HAL_TIM_Base_Start_IT(&htim2); // 启动定时器4
     //Motor_Ctrl(-400, 1); // 作用到电机
     //Motor_Ctrl(-1200, 2); // 作用到电机
-    OLED_ShowSignedNum(1, 1, 11221, 5);
-    //OLED_ShowString(2,2,"1234567890");
+
 }
 
 /**
