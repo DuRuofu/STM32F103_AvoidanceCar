@@ -1,8 +1,15 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM32ZET6_CAR'
-compiling ccd.c...
-linking...
-Program Size: Code=21698 RO-data=2534 RW-data=132 ZI-data=3540  
-FromELF: creating hex file...
-"..\Output\STM32ZET6_CAR.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:06
+compiling control.c...
+..\Users\Control\control.h(14): warning:  #1-D: last line of file ends without a newline
+  #endif // !__CONTROL_H
+..\Users\Control\control.c(129): error:  #29: expected an expression
+      /Direction_PWM_Out = Kp * Err_Direction + Kd * (Err_Direction - L_Direction_Err);
+..\Users\Control\control.c(122): warning:  #550-D: variable "L_Direction_Err"  was set but never used
+      static int32_t Direction_PWM_Out = 0, Err_Direction = 0,L_Direction_Err=0; // 转向环输�?
+..\Users\Control\control.c(227): warning:  #223-D: function "myabs" declared implicitly
+  	if(myabs(CCD_Zhongzhi-Last_CCD_Zhongzhi)>70)   //计算中线的偏差，如果太大
+..\Users\Control\control.c: 3 warnings, 1 error
+"..\Output\STM32ZET6_CAR.axf" - 1 Error(s), 3 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:12

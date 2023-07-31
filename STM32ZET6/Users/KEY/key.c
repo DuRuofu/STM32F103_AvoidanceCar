@@ -2,10 +2,11 @@
 #include "led.h"
 #include "gui.h"
 
+#include "yuntai.h"
 #define KEY1_Pin KEY_1_Pin
 #define KEY2_Pin KEY_2_Pin
 
-uint8_t GUI_Menu = 0;
+extern uint8_t GUI_Menu;
 
 
 /**
@@ -19,9 +20,11 @@ void Key_Init(void)
 
 void Key_1_Callback(void)
 {
+        Yuntai_Init();        // 云台初始化
+    OLED_Clear(); 
     // 按键1按下的处理代码
     LED_Toggle(2);
-    if (GUI_Menu < 2)
+    if (GUI_Menu < 3)
     {
         GUI_Menu++;
     }
@@ -29,11 +32,13 @@ void Key_1_Callback(void)
     {
         GUI_Menu = 0;
     }
+    
 }
 
 
 void Key_2_Callback(void)
 {
+    OLED_Clear(); 
     // 按键2按下的处理代码
     LED_Toggle(2);
     if (GUI_Menu > 0)
@@ -42,7 +47,7 @@ void Key_2_Callback(void)
     }
     else
     {
-        GUI_Menu = 2;
+        GUI_Menu = 3;
     }
 }
 

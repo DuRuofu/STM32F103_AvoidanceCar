@@ -2,8 +2,9 @@
 #define __GUI_H
 
 #include "OLED.h"
+#include "app.h"
+void Menu_Refresh(void);
 
-void Menu_Refresh();
 #endif // !__GUI_H
 
 

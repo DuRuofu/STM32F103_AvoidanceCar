@@ -18,7 +18,9 @@
         "stdint.h": "c",
         "gui.h": "c",
         "motor.h": "c",
-        "ccd.h": "c"
+        "ccd.h": "c",
+        "control.h": "c",
+        "yuntai.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
